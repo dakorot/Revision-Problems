@@ -17,13 +17,28 @@ bool is_vowel(char letter)
     return false;
 }
 
+int count_vowels(char word[])
+{
+    int counter = 0;
+    for(int i=0; word[i]; i++)
+        if(is_vowel(word[i]))
+            ++counter;
+
+    return counter;
+}
+
 void word2syllables(char word[])
 {
+    int vowels = count_vowels(word);
+
     for(int i=0; word[i]; i++)
     {
         printf("%c", word[i]);
-        if(is_vowel(word[i]) && !((word[i+1] == '\0') || (word[i+2] == '\0')))
+        if(is_vowel(word[i]) && (vowels != 1))
+        {
             printf(" ");
+            --vowels;
+        }
     }
 }
 
